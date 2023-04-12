@@ -36,6 +36,11 @@ const initializeDb = async () => {
 
 initializeDb();
 
+
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Server Running" });
+});
+
 app.post("/signup", async (req, res) => {
   const { fullName, role, email, password } = req.body;
   try {
