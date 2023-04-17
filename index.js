@@ -201,15 +201,42 @@ app.get("/questions/:id", async (req, res) => {
   }
 });
 
-app.delete("/questions/:id", async (req, res) => {
+
+
+app.delete("/questions/:id", (req, res) => {
   const { id } = req.params;
+
+  // Load existing problems from the problems.js file
+  let problems = [];
   try {
-    const user = await Questions.findByIdAndRemove(id);
-    res.status(200).json({ message: "Question Deleted" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    problems = require("./problems");
+  } catch (err) {
+    console.log("Error loading problems:", err);
+    res.status(500).send("Error loading problems");
+    return;
   }
+
+  // Find the problem with the given ID and remove it
+  const index = problems.findIndex((problem) => problem.id === id);
+  if (index === -1) {
+    res.status(404).send("Problem not found");
+    return;
+  }
+  problems.splice(index, 1);
+
+  // Save the updated problems array to the problems.js file
+  const fileContent = `module.exports = ${JSON.stringify(problems, null, 2)}`;
+  fs.writeFile("./problems.js", fileContent, (err) => {
+    if (err) {
+      console.log("Error saving problems:", err);
+      res.status(500).send("Error saving problems");
+    } else {
+      console.log(`Problem with ID ${id} deleted`);
+      res.status(200).send("Problem deleted successfully");
+    }
+  });
 });
+
 
 app.get("/submissions", async (req, res) => {
   const { problemId, userId } = req.query;
