@@ -27,37 +27,19 @@ module.exports = [
     testCases: [
       {
         input: ["racecar"],
-        expectedOutput: true,
+        expectedOutput: "true",
       },
       {
         input: ["hello"],
-        expectedOutput: false,
+        expectedOutput: "false",
       },
       {
-        input: [""],
-        expectedOutput: true,
+        input: ["world"],
+        expectedOutput: "false",
       },
     ],
   },
-  {
-    id: "98d9bc48c26f1a7e223e8c33",
-    title: "Write a function that calculates the factorial of a number",
-    description: "Given a non-negative integer n, return n factorial (n!).",
-    testCases: [
-      {
-        input: [5],
-        expectedOutput: 120,
-      },
-      {
-        input: [0],
-        expectedOutput: 1,
-      },
-      {
-        input: [1],
-        expectedOutput: 1,
-      },
-    ],
-  },
+
   {
     id: "a572f491ed29cc97d1f8d9d9",
     title: "Write a function that checks if a given number is prime",
@@ -66,15 +48,15 @@ module.exports = [
     testCases: [
       {
         input: [7],
-        expectedOutput: true,
+        expectedOutput: "true",
       },
       {
         input: [12],
-        expectedOutput: false,
+        expectedOutput: "false",
       },
       {
         input: [1],
-        expectedOutput: false,
+        expectedOutput: "false",
       },
     ],
   },

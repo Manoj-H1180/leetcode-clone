@@ -204,7 +204,7 @@ app.get("/questions/:id", async (req, res) => {
 
 
 app.delete("/questions/:id", (req, res) => {
-  const { title } = req.params;
+  const { id } = req.params;
 
   // Load existing problems from the problems.js file
   let problems = [];
@@ -217,7 +217,7 @@ app.delete("/questions/:id", (req, res) => {
   }
 
   // Find the problem with the given ID and remove it
-  const index = problems.findIndex((problem) => problem.title === title);
+  const index = problems.findIndex((problem) => problem.id === id);
   if (index === -1) {
     res.status(404).send("Problem not found");
     return;
