@@ -138,7 +138,7 @@ app.delete("/users/:id", async (req, res) => {
 });
 
 app.post("/admin/questions", (req, res) => {
-  const { title, description, input, output } = req.body;
+  const { id, title, description, input, output, difficulty } = req.body;
 
   // Load existing problems from the problems.js file
   let problems = [];
@@ -154,8 +154,10 @@ app.post("/admin/questions", (req, res) => {
 
   // Add the new problem to the array
   problems.push({
+    id: id,
     title: title,
     description: description,
+    difficulty: difficulty,
     testCases: [
       {
         input: formattedInput,
